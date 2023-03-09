@@ -1,0 +1,19 @@
+{
+  "name": "modulologin",
+  "version": "1.0.0",
+  "description": "Modulo de login",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Davidachoy/ModuloLogin.git"
+  },
+  "author": "David, Jeffry, Andy, Daniel, Jose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Davidachoy/ModuloLogin/issues"
+  },
+  "homepage": "https://github.com/Davidachoy/ModuloLogin#readme"
+}
