@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 
 const registerView = (req, res) => {
-    res.render("register", {
-    } );
+    res.sendFile(path.join(__dirname, './../views/register.html'));
+
 };
 
 const loginView = (req, res) => {
