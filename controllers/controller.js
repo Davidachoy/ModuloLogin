@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const registerView = (req, res) => {
     res.render("register", {
@@ -13,7 +14,7 @@ const loginView = (req, res) => {
         
     } );*/
 
-    res.sendFile("/Users/jsc190/Projects/ModuloLogin/views/login.html");
+    res.sendFile(path.join(__dirname, './../views/login.html'));
 };
 
 const registerUser = async (req, res) => {
