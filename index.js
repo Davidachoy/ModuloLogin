@@ -1,23 +1,9 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require("cors");
-const path = require('path');
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
 
-const app = express();
-const port = 3000;
+const { PORT } = process.env;
 
-app.use(cors());
-
-const conn = mongoose.createConnection("mongodb://localhost:27017/test");
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-  
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
-
-app.get("/user/login", function(req, res){
-    res.sendFile();
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
