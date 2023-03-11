@@ -37,7 +37,7 @@
         box-sizing: border-box;
       }
 
-      button[type="submit"] {
+      button[type="submit"], button[type="button"] {
         background-color: #588de9;
         color: #fff;
         padding: 12px 20px;
@@ -47,7 +47,7 @@
         cursor: pointer;
       }
 
-      button[type="submit"]:hover {
+      button[type="submit"]:hover , button[type="button"]:hover {
         background-color: #213455;
       }
 
@@ -67,7 +67,7 @@
         <input type="password" placeholder="Ingrese su contraseña" name="password" required>
 
         <button type="submit">Iniciar sesión</button>
-        <button type="submit">Registrarse</button>
+        <button type="button" onclick="location.href='/register'">Registrarse</button>
 
       </div>
     </form>
