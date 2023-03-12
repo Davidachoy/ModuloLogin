@@ -4,15 +4,9 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     _id: {
         type: String,
-        validate: {
-            validator: (email) => {
-                let regex = new RegExp('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$');
-                return regex.test(email);
-            },
-            message: 'You have entered an invalid email!'
-        }
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "You have entered an invalid email!"],
     },
-    firstName: {
+    name: {
         type: String,
         require: true,
     },
@@ -36,13 +30,7 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         require: true,
-        validate: {
-            validator: (number) => {
-                let regex = new RegExp("^\+\d{1,3}\d{1,14}$");
-                return regex.test(number);
-            },
-            message: 'You have entered an invalid phone number!'
-        },
+        match: [/^\+\d{1,3}\d{1,14}$/, 'You have entered an invalid phone number!'],
     },
     gender: {
         type: String,
@@ -91,7 +79,6 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: [],
     },
-    token: { type: String },
 });
 
 module.exports = mongoose.model("User", userSchema);

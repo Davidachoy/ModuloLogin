@@ -20,10 +20,10 @@ module.exports = class Controller{
         res.sendFile(path.join(__dirname, './../views/account.html'));
     }
     static registerUser = async (req, res) => {
-        let { email, firstName, lastName, username, password, discord, phone, gender, birthDate, identification, 
-            academicInstitution, shirtSize, medicalConditions, dietaryConditions, hasParticipated, knowledge } = req.body;
+        let { email, password, name, lastName, username, discord, phone, birthDate, identification, academicInstitution, 
+            medicalConditions, dietaryConditions, hasParticipated, gender, shirtSize, knowledge } = req.body;
         
-        if (!(email && firstName && lastName && username && password && discord && phone && gender && birthDate && academicInstitution)) {
+        if (!(email && name && lastName && username && password && discord && phone && gender && birthDate && academicInstitution)) {
             throw new Error('You must fill all required fields!');
         }
     
@@ -39,7 +39,7 @@ module.exports = class Controller{
     
             const token = jwt.sign(
                 { 
-                    user: email,
+                    email,
                     exp: Math.floor(Date.now() / 1000) + (60*60*24*7),
                 },
                 process.env.TOKEN_KEY,
@@ -47,26 +47,28 @@ module.exports = class Controller{
     
             const user = new User({
                 _id: email, 
-                firstName, 
+                password: hashedPassword,
+                name, 
                 lastName, 
-                username, 
-                password: hashedPassword, 
+                username,  
                 discord, 
                 phone, 
-                gender, 
                 birthDate, 
                 identification, 
                 academicInstitution, 
-                shirtSize, 
                 medicalConditions, 
                 dietaryConditions, 
-                hasParticipated, 
+                hasParticipated,
+                gender,
+                shirtSize, 
                 knowledge,
-                token,
             });
     
             user.save()
-                .then(res.redirect("/account"));
+                .then(() => {
+                    res.cookie('access-token', token);
+                    res.redirect("/account");
+                });
         });
     };
     static loginUser = async (req, res) => {
@@ -87,7 +89,8 @@ module.exports = class Controller{
                 process.env.TOKEN_KEY,
             );
             
-            user.token = token;
-        }
+            res.cookie('access-token', token);
+            res.redirect("/account");
+}
     };
 }

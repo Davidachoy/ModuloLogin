@@ -9,7 +9,7 @@
 
 <body>
     <h2>Sign Up</h2>
-    <form>
+    <form action="/register" method="post">
         <div class="container">
             <label for="email"><b>Email</b></label>
             <input type="email" placeholder="Type in your email address" id="email" name="email" #email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" title="You must type a valid email!" required />
@@ -24,7 +24,7 @@
             <input type="text" placeholder="Type in your last name" id="lastName" name="lastName" #lastName required />
 
             <label for="user"><b>Username</b></label>
-            <input type="text" placeholder="Type in your username" id="user" name="user" #user required />
+            <input type="text" placeholder="Type in your username" id="username" name="username" #username required />
 
             <label for="discord"><b>Discord username</b></label>
             <input type="text" placeholder="Type in your discord username" id="discord" name="discord" #discord required />
@@ -37,7 +37,7 @@
             <br/><br/>
 
             <label for="id"><b>ID</b></label>
-            <input type="text" placeholder="Type in your national ID" id="id" name="id" #id required />
+            <input type="text" placeholder="Type in your national ID" id="id" name="id" #id />
 
             <label for="academicInstitution"><b>Academic Institution</b></label>
             <input type="text" placeholder="Type in your academic institution" id="academicInstitution" name="academicInstitution" #academicInstitution required />
@@ -82,7 +82,7 @@
 
             <div class="flex-wrap justify-content-between align-items-center">
                 <button type="button" onclick="location.href='/login'">Log In</button>
-                <button type="button">Sign Up</button>
+                <button type="submit">Sign Up</button>
             </div>
         </div>
     </form>
