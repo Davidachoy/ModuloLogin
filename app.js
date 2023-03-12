@@ -5,11 +5,13 @@ const auth = require('./middleware/auth');
 const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyparser.urlencoded({extended:false}));
+app.use(express.static("assets"));
 
 app.get('/', controller.loginView);
   
