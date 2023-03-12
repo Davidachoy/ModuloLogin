@@ -24,18 +24,18 @@ module.exports = class Controller{
             medicalConditions, dietaryConditions, hasParticipated, gender, shirtSize, knowledge } = req.body;
         
         if (!(email && name && lastName && username && password && discord && phone && gender && birthDate && academicInstitution)) {
-            throw new Error('You must fill all required fields!');
+            console.error(new Error('You must fill all required fields!'));
         }
     
         let emailExists = await User.findById(email);
-        if (emailExists) throw new Error('email is already registered!');
+        if (emailExists) console.error(new Error('email is already registered!'));
     
         let userExists = await User.findOne({ username });
-        if (userExists) throw new Error('User already exists!');
+        if (userExists) console.error(new Error('User already exists!'));
     
         //Encrypting password
         bcrypt.hash(password, 10, (err, hashedPassword) => {
-            if (err) throw err;
+            if (err) console.error(err);
     
             const token = jwt.sign(
                 { 
@@ -75,12 +75,12 @@ module.exports = class Controller{
         const { email, password } = req.body;
     
         if (!(email && password)) {
-            throw new Error('You must fill all required fields!');
+            console.error(new Error('You must fill all required fields!'));
         }
     
         const user = await User.findById(email);
-    
-        if (user && (bcrypt.compare(password, user.password))) {
+        
+        if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign(
                 { 
                     user: email,
@@ -91,6 +91,6 @@ module.exports = class Controller{
             
             res.cookie('access-token', token);
             res.redirect("/account");
-}
+        } else res.sendStatus(401);
     };
 }
